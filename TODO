@@ -1,1 +1,5 @@
+Make "length" an option too instead of a positional argument (?)
+Make the default action to just output the passcode and show the current output for a new "--verbose" option
+
 Add the password generator to the script as well
+
