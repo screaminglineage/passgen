@@ -40,43 +40,41 @@ def gen_passcode(length=4, separator=' ', capitalize=False):
     return passcode[:-1]
 
 
-# TODO make the argument parser into a function
-parser = argparse.ArgumentParser(
-         description='Generate a random series of words separated by a character')
+def get_args():
+    parser = argparse.ArgumentParser(description='Generate a random series of words separated by a character')
 
-# Gets Comand Line Arguments
-parser.add_argument('-q', '--quiet', action='store_true',
-                    help='display only passcode')
+    # Gets Comand Line Arguments
+    parser.add_argument('-q', '--quiet', action='store_true',
+                        help='display only passcode')
 
-parser.add_argument('length', type=int, nargs='?',
-                    help='specify the number of words (DEFAULT: 4) ')
+    parser.add_argument('length', type=int, nargs='?',
+                        help='specify the number of words (DEFAULT: 4)')
 
-parser.add_argument('-s', '--separator', default='-', type=str,
-                    help='character to separate each word (DEFAULT: "-")')
+    parser.add_argument('-s', '--separator', default='-', type=str,
+                        help='character to separate each word (DEFAULT: "-")')
 
-parser.add_argument('-c', '--capitalize', action='store_true',
-                    help='capitalize the first character of each word')
+    parser.add_argument('-c', '--capitalize', action='store_true',
+                        help='capitalize the first character of each word')
 
-
-
-args = parser.parse_args()
-
-# Sets the length to 4 by default if no value is entered
-if args.length is None:
-    length = 4
-else:
-    length = args.length
+    args = parser.parse_args()
+    return args
 
 
-passcode = gen_passcode(length, args.separator, args.capitalize)
+def main(args):
+    # Sets the length to 4 by default if no value is entered
+    if args.length is None:
+        length = 4
+    else:
+        length = args.length
 
-# Displays only the passcode if quiet mode is turned on
-if args.quiet:
-    print(passcode)
-else:
-    print('Generated Passcode:', passcode)
+    passcode = gen_passcode(length, args.separator, args.capitalize)
+    # Displays only the passcode if quiet mode is turned on
+    if args.quiet:
+        print(passcode)
+    else:
+        print('Generated Passcode:', passcode)
 
 
-
+main(get_args())
 
 
