@@ -40,29 +40,7 @@ def gen_passcode(length=4, separator=' ', capitalize=False):
     return passcode[:-1]
 
 
-
-"""
-        while word_count < length:
-            # Random number which corresponds to a list index of a word
-            num = random.randint(0, (len(words_list) - 1))
-
-            for i in range(len(words_list)):
-                if num == i:
-                    # Capitalizes the first letter of each word in passcode
-                    if capitalize:
-                        word = words_list[i].strip().capitalize()
-                    else:
-                        word = words_list[i].strip()
-
-                    # Joins the words together with separator in between each
-                    passcode += word + separator
-                    # Increments word counter to count no. of words in passcode
-                    word_count += 1
-
-    # Deletes the last character from passcode as it's a trailing separator character
-    return passcode[:-1]
-
-"""
+# TODO make the argument parser into a function
 parser = argparse.ArgumentParser(
          description='Generate a random series of words separated by a character')
 
@@ -89,13 +67,8 @@ if args.length is None:
 else:
     length = args.length
 
-# Turns off capitalization by default if no value is entered
-if args.capitalize:
-    capitalize = True
-else:
-    capitalize = False
 
-passcode = gen_passcode(length, args.separator, capitalize)
+passcode = gen_passcode(length, args.separator, args.capitalize)
 
 # Displays only the passcode if quiet mode is turned on
 if args.quiet:
