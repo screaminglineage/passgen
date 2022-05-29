@@ -23,6 +23,25 @@ def gen_passcode(length=4, separator=' ', capitalize=False):
         passcode = ''           # Stores passcode
         words_list = words_file.readlines()
 
+    # TODO change it so that it first generates 4 random words
+    # and then adds the separator character after each of them
+    # except for the last one
+    while word_count < length:
+        num = random.randint(0, (len(words_list) - 1))
+
+        for i in range(len(words_list)):
+            if num == i:
+                if capitalize:
+                    word = words_list[i].strip().capitalize()
+                else:
+                    word = words_list[i].strip()
+                passcode += word + separator
+                word_count += 1
+    return passcode[:-1]
+
+
+
+"""
         while word_count < length:
             # Random number which corresponds to a list index of a word
             num = random.randint(0, (len(words_list) - 1))
@@ -43,7 +62,7 @@ def gen_passcode(length=4, separator=' ', capitalize=False):
     # Deletes the last character from passcode as it's a trailing separator character
     return passcode[:-1]
 
-
+"""
 parser = argparse.ArgumentParser(
          description='Generate a random series of words separated by a character')
 
