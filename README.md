@@ -87,10 +87,3 @@ The `word` keyword needs to be used before any of the options below.
   - `passgen word -s` - generates a random **50** character password with **uppercase**, **lowercase**, **digits** and **special characters** included)
   - `passgen word -l 10 -nl -nu` - generates a random **10** character password without any **uppercase** or **lowercase** characters (ie. using only **digits**)
 
-asdadas
-das
-d
-asd
-asd
-as
-d
