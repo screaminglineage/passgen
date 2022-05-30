@@ -148,7 +148,8 @@ def main(args):
 
         output = gen_password(args.length, args.no_uppercase,
                 args.no_lowercase, args.no_digits, args.special_chars)
-    
-main(get_args())
+    return output
+
+print(main(get_args()))
 
 
