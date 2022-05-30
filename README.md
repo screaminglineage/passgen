@@ -4,6 +4,13 @@ Command line password and passcode generator
 ## Contents
   1.  [Introduction](#introduction)
   2.  [Usage](#usage)
+      - [Generate Passphrase](#generate-passphrase)
+        - [Options](#options)
+        - [Examples](#examples)
+      - [Generate Password](#generate-password)
+        - [Options](#options)
+        - [Examples](#examples)
+
 ---
 
 ## Introduction
@@ -13,32 +20,61 @@ passgen can be used to generate a passcode, or a string of randomly generated wo
 
 ## Usage
 ```
-usage: passgen [-h] [-v] [-s SEPARATOR] [-c] [length]
+usage: passgen [-h] {phrase,word} ...
 
-Generate a random series of words separated by a character
-
-positional arguments:
-  length                specify the number of words (DEFAULT: 4)
+Generate a password or a passphrase
 
 options:
-  -h, --help            show this help message and exit
-  -v, --verbose         display more text as output
-  -s SEPARATOR, --separator SEPARATOR
-                        character to separate each word (DEFAULT: "-")
-  -c, --capitalize      capitalize the first character of each word (DEFAULT: Off))
+  -h, --help     show this help message and exit
+
+modes available:
+  to see help for the modes try "passgen phrase -h" or "passgen word -h"
+
+  {phrase,word}
+    phrase       generate a passphrase
+    word         generate a password
 ```
 
   
-### Options with Examples
+### Generate Passphrase
+```
+usage: passgen phrase [-h] [-w WORD_COUNT] [-S SEPARATOR] [-c]
+
+Generates a random series of words separated by a character
+```
+#### Options
+The `phrase` keyword needs to be used before any of the options to denote the mode
+
+  - `-w`, `--word-count` - set the number of words in passphrase [DEFAULT: **4**]
+  - `-S`, `--separator` - set separator between each word of passphrase [DEFAULT: "**-**"]
+  - `-c`, `--capitalize` - capitalize the first letter of each word in the passphrase
+
   
-  - `length` - set the number of words in the passcode [DEFAULT: **4**]
-  - `-v`, `--verbose` - will passcode in the format `Generated Passcode: <Passcode>`
-  - `-s`, `--separator` - denote the word-separator in the pass code [DEFAULT: "**-**"]
-  - `-c`, `--capitalize` - capitalize the first letter of each word in the passcode
-  
-Examples - 
-  - `passgen 3` - will output a random string of **3** words separated by a "**-**" such as `given-yard-slip`
-  - `passgen 5 -s "#"` - will output a random string of **5** words separated by a "**#**" such as `push#square#hall#satisfy#summer`
-  - `passgen -c -s "@"` - will output a random string of **4** (Default) words separated by an "**@**" with the first letter of each word capitalized such as `Concern@Imagine@Economic@Plane`
+#### Examples  
+  - `passgen phrase -w 3` - generates a random string of **3** words separated by a "**-**" such as `given-yard-slip`
+  - `passgen phrase -w 5 -S "#"` - generates a random string of **5** words separated by a "**#**" such as `push#square#hall#satisfy#summer`
+  - `passgen phrase -c -S "@"` - generates a random string of **4** (Default) words separated by an "**@**" with the first letter of each word capitalized such as `Concern@Imagine@Economic@Plane`
 
  
+### Generate Password
+```
+usage: passgen word [-h] [-l LENGTH] [-nu] [-nl] [-nd] [-s]
+
+Generates a random series of words separated by a character
+```
+#### Options
+The `word` keyword needs to be used before any of the options to denote the mode
+
+  - `-h`, `--help` - show a help message and exit
+  - `-l`, `--length` - set the length of the password [DEFAULT: **50**]
+  - `-nu`, `--no-uppercase` - dont allow uppercase characters in the password [DEFAULT: **On**]
+  - `-nl`, `--no-lowercase` - dont allow lowercase characters in the password [DEFAULT: **On**]
+  - `-nd`, `--no-digits` - dont allow digits in the password [DEFAULT: **On**]
+  - `-s`, `--special-chars` - allow special characters in the password [DEFAULT: **Off**]
+
+#### Examples
+
+  - `passgen word -l 45` - generate a random **45** character password using **uppercase**, **lowercase** and **digits** 
+  - `passgen word -l 50 -nd` - generates a random **50** character password without using any **digits**
+  - `passgen word -s` - generates a random **50** character password with **uppercase**, **lowercase**, **digits** and **special characters** included)
+  - `passgen word -l 10 -nl -nu` - generates a random **10** character password without any **uppercase** or **lowercase** characters (ie. using only **digits**)
