@@ -57,7 +57,6 @@ def gen_password(length, allow_upper, allow_lower, allow_digit, allow_special):
     return password
 
 
-
 def gen_passcode(filepath, length, separator, is_capital):
     '''Generates a list of random words from a file and then performs the
     required operations (adding capitalization and/or separator)'''
