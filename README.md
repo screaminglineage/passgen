@@ -9,12 +9,11 @@ Command line password and passcode generator
 ## Introduction
 
 passgen can be used to generate a passcode, or a string of randomly generated words separated by any symbol. The separator can be anything including a blank (no separator) or just some white space (as long as it is enclosed within quotes while entering).
-By default the output is in the format `Generated Passcode: <Passcode>`, but the `--quiet` option can be specified to output just the passcode itself.
 
 
 ## Usage
 ```
-usage: passgen.py [-h] [-q] [-s SEPARATOR] [-c] [length]
+usage: passgen.py [-h] [-v] [-s SEPARATOR] [-c] [length]
 
 Generate a random series of words separated by a character
 
@@ -23,16 +22,17 @@ positional arguments:
 
 options:
   -h, --help            show this help message and exit
-  -q, --quiet           display only passcode
+  -v, --verbose         display more text as output
   -s SEPARATOR, --separator SEPARATOR
                         character to separate each word (DEFAULT: "-")
   -c, --capitalize      capitalize the first character of each word (DEFAULT: Off))
-  ```
+```
+
   
 ### Options with Examples
   
   - `length` - set the number of words in the passcode [DEFAULT: **4**]
-  - `-q`, `--quiet` - will show only the output passcode instead of `Generated Passcode: <Passcode>`
+  - `-v`, `--verbose` - will passcode in the format `Generated Passcode: <Passcode>`
   - `-s`, `--separator` - denote the word-separator in the pass code [DEFAULT: "**-**"]
   - `-c`, `--capitalize` - capitalize the first letter of each word in the passcode
   
