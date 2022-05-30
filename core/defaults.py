@@ -27,7 +27,7 @@ WORDS_FILE = "words.txt"
 
 # Print "[DEFAULT: On/Off]" in help text
 default_is_capital = "On" if IS_CAPITAL else "Off"
-default_no_upper = "On" if NO_UPPER else "Off"
-default_no_lower = "On" if NO_LOWER else "Off"
-default_no_digit = "On" if NO_DIGIT else "Off"
-default_allow_special = "On" if NO_SPECIAL else "Off"
+default_no_upper = "Off" if NO_UPPER else "On"
+default_no_lower = "Off" if NO_LOWER else "On"
+default_no_digit = "Off" if NO_DIGIT else "On"
+default_no_special = "On" if NO_SPECIAL else "Off"

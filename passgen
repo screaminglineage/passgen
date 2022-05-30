@@ -29,7 +29,9 @@ def get_args():
 
     
     # Password Options 
-    word = subparsers.add_parser('word', help='generate a password')
+    word = subparsers.add_parser('word', help='generate a password',
+                                description='Generates a random series of words separated by a character')
+    
     word.add_argument('-l', '--length', type=int, default = PASSWORD_LENGTH,
                         help=f'specify the length of the password [DEFAULT: {PASSWORD_LENGTH}]')
 
@@ -43,7 +45,7 @@ def get_args():
                         help=f'dont allow digits in the password [DEFAULT: {default_no_digit}]')
 
     word.add_argument('-s', '--special-chars', action='store_true', default = NO_SPECIAL,
-                        help=f'allow special characters in the password [DEFAULT: {default_allow_special}]')
+                        help=f'allow special characters in the password [DEFAULT: {default_no_special}]')
 
     args = parser.parse_args()
     return args
