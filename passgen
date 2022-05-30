@@ -62,7 +62,7 @@ def main(args):
         # Checks if all have been set to False
         if False == args.no_uppercase == args.no_lowercase == args.no_digits \
                  == args.special_chars:
-            print("Error! No possible password for this configuration. All possible options disabled")
+            print("Error! No possible password for this configuration. All available options disabled")
             exit(1)
 
         output =  gen_password(args.length, args.no_uppercase, args.no_lowercase,
