@@ -12,7 +12,7 @@ def get_args():
     # Gets Comand Line Arguments
     parser = argparse.ArgumentParser(description='Generate a password or a passphrase')    
     subparsers = parser.add_subparsers(title='modes available', dest="mode",
-                                    description='to see help for the modes try "passgen phrase -h" or "passgen word -h"')
+                                    description='to see help for the modes try "passgen phrase -h" or "passgen key -h"')
                  
     # Passphrase Options
     phrase = subparsers.add_parser('phrase', help='generate a passphrase', 
@@ -29,22 +29,22 @@ def get_args():
 
     
     # Password Options 
-    word = subparsers.add_parser('word', help='generate a password',
-                                description='Generates a random series of words separated by a character')
+    key = subparsers.add_parser('key', help='generate a password',
+                                description='Generates a random string of characters')
     
-    word.add_argument('-l', '--length', type=int, default = PASSWORD_LENGTH,
+    key.add_argument('-l', '--length', type=int, default = PASSWORD_LENGTH,
                         help=f'specify the length of the password [DEFAULT: {PASSWORD_LENGTH}]')
 
-    word.add_argument('-nu', '--no-uppercase', action='store_false', default = NO_UPPER,
+    key.add_argument('-nu', '--no-uppercase', action='store_false', default = NO_UPPER,
                         help=f'dont allow uppercase characters in the password [DEFAULT: {default_no_upper}]')
 
-    word.add_argument('-nl', '--no-lowercase', action='store_false', default = NO_LOWER,
+    key.add_argument('-nl', '--no-lowercase', action='store_false', default = NO_LOWER,
                         help=f'dont allow lowercase characters in the password [DEFAULT: {default_no_lower}]')
 
-    word.add_argument('-nd', '--no-digits', action='store_false', default = NO_DIGIT,
+    key.add_argument('-nd', '--no-digits', action='store_false', default = NO_DIGIT,
                         help=f'dont allow digits in the password [DEFAULT: {default_no_digit}]')
 
-    word.add_argument('-s', '--special-chars', action='store_true', default = NO_SPECIAL,
+    key.add_argument('-s', '--special-chars', action='store_true', default = NO_SPECIAL,
                         help=f'allow special characters in the password [DEFAULT: {default_no_special}]')
 
     args = parser.parse_args()
@@ -58,7 +58,7 @@ def main(args):
         output = gen_passphrase(f"{FILES_PATH}{WORDS_FILE}", args.word_count,
                                 args.separator, args.capitalize)
     # Password
-    elif args.mode == "word":
+    elif args.mode == "key":
         # Checks if all have been set to False
         if False == args.no_uppercase == args.no_lowercase == args.no_digits \
                  == args.special_chars:
