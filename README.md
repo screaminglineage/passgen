@@ -13,7 +13,7 @@ passgen can be used to generate a passcode, or a string of randomly generated wo
 
 ## Usage
 ```
-usage: passgen.py [-h] [-v] [-s SEPARATOR] [-c] [length]
+usage: passgen [-h] [-v] [-s SEPARATOR] [-c] [length]
 
 Generate a random series of words separated by a character
 
@@ -37,8 +37,8 @@ options:
   - `-c`, `--capitalize` - capitalize the first letter of each word in the passcode
   
 Examples - 
-  - `passgen.py 3` - will output a random string of **3** words separated by a "**-**" such as `given-yard-slip`
-  - `passgen.py 5 -s "#"` - will output a random string of **5** words separated by a "**#**" such as `push#square#hall#satisfy#summer`
-  - `passgen.py -c -s "@"` - will output a random string of **4** (Default) words separated by an "**@**" with the first letter of each word capitalized such as `Concern@Imagine@Economic@Plane`
+  - `passgen 3` - will output a random string of **3** words separated by a "**-**" such as `given-yard-slip`
+  - `passgen 5 -s "#"` - will output a random string of **5** words separated by a "**#**" such as `push#square#hall#satisfy#summer`
+  - `passgen -c -s "@"` - will output a random string of **4** (Default) words separated by an "**@**" with the first letter of each word capitalized such as `Concern@Imagine@Economic@Plane`
 
  
