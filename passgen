@@ -5,9 +5,6 @@ from config import *
 import pass_generators
 
 
-
-
-
 # Argparser get command line options
 def get_args():
     # Gets Comand Line Arguments
@@ -48,6 +45,7 @@ def get_args():
 
     args = parser.parse_args()
     return args
+
 
 
 def main(args):
