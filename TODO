@@ -1,4 +1,8 @@
-Make "length" an option too instead of a positional argument (?)
+Update README
+Change directory tree
+Add Menu option
+Make the length of each word configurable (for passphrase)
+Make sure a single word isnt repeated twice (for passphrase)
+Auto-copy to clipboard after generating output (?)
 
-Add the password generator to the script as well
 
