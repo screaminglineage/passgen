@@ -4,13 +4,14 @@ import random
 import argparse
 
 # Default values
-LENGTH = 4                  # Number of words in passcode
-SEPARATOR = '-'             # Passcode separator
+WORD_COUNT = 4              # Number of words in passphrase
+PASSWORD_LENGTH = 20        # Number of characters in password
+SEPARATOR = '-'             # Passphrase separator
 
 IS_CAPITAL = False          # Whether first letters are capitalized
-ALLOW_UPPER = True          
-ALLOW_LOWER = True          
-ALLOW_DIGIT = True          
+NO_UPPER = True          
+NO_LOWER = True          
+NO_DIGIT = True          
 ALLOW_SPECIAL = False          
 
 FILES_PATH = "files/"       # File Paths
@@ -39,25 +40,23 @@ def gen_special():
 
 
 def gen_password(length, allow_upper, allow_lower, allow_digit, allow_special):
+    """Generates a random password"""
     password = ""
     while len(password) < length:
         choice = random.randint(1, 4)
 
         if choice == 1 and allow_upper:
             password += gen_upper()
-
-        if choice == 2 and allow_lower:
+        elif choice == 2 and allow_lower:
             password += gen_lower()
-
-        if choice == 3 and allow_digit:
+        elif choice == 3 and allow_digit:
             password += gen_digit()
-
-        if choice == 4 and allow_special:
+        elif choice == 4 and allow_special:
             password += gen_special()
     return password
 
 
-def gen_passcode(filepath, length, separator, is_capital):
+def gen_passphrase(filepath, word_count, separator, is_capital):
     '''Generates a list of random words from a file and then performs the
     required operations (adding capitalization and/or separator)'''
     
@@ -65,73 +64,95 @@ def gen_passcode(filepath, length, separator, is_capital):
         words_list = words_file.readlines()
 
     # Generating random words
-    passcode_words = []
-    while len(passcode_words) < length:
+    passphrase_words = []
+    while len(passphrase_words) < word_count:
         num = random.randint(0, (len(words_list) - 1))
-        passcode_words.append(words_list[num].strip())
+        passphrase_words.append(words_list[num].strip())
 
-    # Capitalizing first letter of each word
-    if is_capital:
-        for i, word in enumerate(passcode_words):
-            passcode_words[i] = passcode_words[i].capitalize() 
-    passcode = separator.join(passcode_words)
-    return passcode
+    # Capitalizing first letter of each word is specified
+    # Also makes all words starting with a capital letter lowercase 
+    # if no capitalize option specified
+    for i, word in enumerate(passphrase_words):
+        if word[0][0].isupper() and is_capital is False:
+            passphrase_words[i] = word.lower()
+        elif is_capital is True:
+            passphrase_words[i] = word.capitalize() 
+    
+    passphrase = separator.join(passphrase_words)
+    return passphrase
 
 
 # Argparser get command line options
 def get_args():
     # Print "DEFAULT: On/Off" in help text
     default_is_capital = "On" if IS_CAPITAL else "Off"
-    default_allow_upper = "On" if ALLOW_UPPER else "Off"
-    default_allow_lower = "On" if ALLOW_LOWER else "Off"
-    default_allow_digit = "On" if ALLOW_DIGIT else "Off"
+    default_no_upper = "On" if NO_UPPER else "Off"
+    default_no_lower = "On" if NO_LOWER else "Off"
+    default_no_digit = "On" if NO_DIGIT else "Off"
     default_allow_special = "On" if ALLOW_SPECIAL else "Off"
 
-    parser = argparse.ArgumentParser(description='Generate a random series of words separated by a character')
-
     # Gets Comand Line Arguments
-    parser.add_argument('mode', nargs='?', choices=('word', 'code'),
-                        help='generate a passcode')
-
+    parser = argparse.ArgumentParser(description='Generate a password or a passphrase')    
+    subparsers = parser.add_subparsers(title='modes available', dest="mode")  
+    
+    # Global Options
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='display more text as output')
 
-    parser.add_argument('length', type=int, nargs='?', default = LENGTH,
-                        help=f'specify the number of words (DEFAULT: {LENGTH})')
+   
+    # Passphrase Options
+    phrase = subparsers.add_parser('phrase', help='generate a passphrase', 
+                                description='Generates a random series of words separated by a character')
+    
+    phrase.add_argument('-w', '--word-count', type=int, default = WORD_COUNT,
+                        help=f'specify the number of words [DEFAULT: {WORD_COUNT}]')
 
-    parser.add_argument('-S', '--separator', type=str, default = SEPARATOR,
-                        help=f'character to separate each word (DEFAULT: "{SEPARATOR}")')
+    phrase.add_argument('-S', '--separator', type=str, default = SEPARATOR,
+                        help=f'character to separate each word [DEFAULT: "{SEPARATOR}"]')
 
-    parser.add_argument('-c', '--capitalize', action='store_true', default = IS_CAPITAL,
-                        help=f'capitalize the first character of each word (DEFAULT: {default_is_capital}))')
+    phrase.add_argument('-c', '--capitalize', action='store_true', default = IS_CAPITAL,
+                        help=f'capitalize the first character of each word [DEFAULT: {default_is_capital}]')
 
-    parser.add_argument('-u', '--allow-uppercase', action='store_false', default = ALLOW_UPPER,
-                        help=f'dont allow uppercase characters in the password (DEFAULT: {default_allow_upper}))')
+    
+    # Password Options 
+    word = subparsers.add_parser('word', help='generate a password')
+    word.add_argument('-l', '--length', type=int, default = PASSWORD_LENGTH,
+                        help=f'specify the length of the password [DEFAULT: {PASSWORD_LENGTH}]')
 
-    parser.add_argument('-l', '--allow-lowercase', action='store_false', default = ALLOW_LOWER,
-                        help=f'dont allow lowercase characters in the password (DEFAULT: {default_allow_lower}))')
+    word.add_argument('-nu', '--no-uppercase', action='store_false', default = NO_UPPER,
+                        help=f'dont allow uppercase characters in the password [DEFAULT: {default_no_upper}]')
 
-    parser.add_argument('-d', '--allow-digits', action='store_false', default = ALLOW_DIGIT,
-                        help=f'allow digits in the password (DEFAULT: {default_allow_digit}))')
+    word.add_argument('-nl', '--no-lowercase', action='store_false', default = NO_LOWER,
+                        help=f'dont allow lowercase characters in the password [DEFAULT: {default_no_lower}]')
 
-    parser.add_argument('-s', '--allow-special', action='store_true', default = ALLOW_SPECIAL,
-                        help=f'allow special characters in the password (DEFAULT: {default_allow_special}))')
+    word.add_argument('-nd', '--no-digits', action='store_false', default = NO_DIGIT,
+                        help=f'dont allow digits in the password [DEFAULT: {default_no_digit}]')
+
+    word.add_argument('-s', '--special-chars', action='store_true', default = ALLOW_SPECIAL,
+                        help=f'allow special characters in the password [DEFAULT: {default_allow_special}]')
 
     args = parser.parse_args()
     return args
 
 
 def main(args):
-    if args.mode == "code":
-        output = gen_passcode(f"{FILES_PATH}{WORDS_FILE}", args.length,
+    # Passphrase 
+    if args.mode == "phrase":
+        output = gen_passphrase(f"{FILES_PATH}{WORDS_FILE}", args.word_count,
                             args.separator, args.capitalize)
-    else:
-        print("No argument given, defaulting to password")
-        output = gen_password(args.length, args.allow_uppercase,
-                args.allow_lowercase, args.allow_digits, args.allow_special)
-    # Displays only the passcode if quiet mode is turned on
+    # Password
+    elif args.mode == "word":
+        # Checks if all have been set to False
+        if False == args.no_uppercase == args.no_lowercase == args.no_digits \
+                 == args.special_chars:
+            print("Error! No possible password for this configuration. All possible options disabled")
+            exit(1)
+
+        output = gen_password(args.length, args.no_uppercase,
+                args.no_lowercase, args.no_digits, args.special_chars)
+    # Displays only the passphrase if quiet mode is turned on
     if args.verbose:
-        print('Generated Passcode:', output)
+        print('Generated Passphrase:', output)
     else:
         print(output)
 main(get_args())
