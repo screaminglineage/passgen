@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
+from core.pass_generators import *
+from core.defaults import *
+
 import argparse
-from config import *
-import pass_generators
+
 
 
 # Argparser get command line options
@@ -51,8 +53,8 @@ def get_args():
 def main(args):
     # Passphrase 
     if args.mode == "phrase":
-        output = pass_generators.gen_passphrase(f"{FILES_PATH}{WORDS_FILE}", args.word_count,
-                                                args.separator, args.capitalize)
+        output = gen_passphrase(f"{FILES_PATH}{WORDS_FILE}", args.word_count,
+                                args.separator, args.capitalize)
     # Password
     elif args.mode == "word":
         # Checks if all have been set to False
@@ -61,8 +63,8 @@ def main(args):
             print("Error! No possible password for this configuration. All possible options disabled")
             exit(1)
 
-        output =  pass_generators.gen_password(args.length, args.no_uppercase,
-                args.no_lowercase, args.no_digits, args.special_chars)
+        output =  gen_password(args.length, args.no_uppercase, args.no_lowercase,
+                               args.no_digits, args.special_chars)
     return output
 
 print(main(get_args()))

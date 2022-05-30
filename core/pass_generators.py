@@ -57,6 +57,6 @@ def gen_passphrase(filepath, word_count, separator, is_capital):
             passphrase_words[i] = word.lower()
         elif is_capital is True:
             passphrase_words[i] = word.capitalize() 
-    
+    # Adding separator
     passphrase = separator.join(passphrase_words)
     return passphrase
