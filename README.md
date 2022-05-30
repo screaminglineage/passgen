@@ -67,10 +67,10 @@ The `word` keyword needs to be used before any of the options to denote the mode
 
   - `-h`, `--help` - show a help message and exit
   - `-l`, `--length` - set the length of the password [DEFAULT: **50**]
-  - `-nu`, `--no-uppercase` - dont allow uppercase characters in the password [DEFAULT: **On**]
-  - `-nl`, `--no-lowercase` - dont allow lowercase characters in the password [DEFAULT: **On**]
-  - `-nd`, `--no-digits` - dont allow digits in the password [DEFAULT: **On**]
-  - `-s`, `--special-chars` - allow special characters in the password [DEFAULT: **Off**]
+  - `-nu`, `--no-uppercase` - dont allow uppercase characters in the password 
+  - `-nl`, `--no-lowercase` - dont allow lowercase characters in the password 
+  - `-nd`, `--no-digits` - dont allow digits in the password 
+  - `-s`, `--special-chars` - allow special characters in the password 
 
 #### Examples
 
