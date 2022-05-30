@@ -1,5 +1,4 @@
 Update README
-Change directory tree
 Add Menu option
 Make the length of each word configurable (for passphrase)
 Make sure a single word isnt repeated twice (for passphrase)
