@@ -42,8 +42,8 @@ def get_args():
     parser = argparse.ArgumentParser(description='Generate a random series of words separated by a character')
 
     # Gets Comand Line Arguments
-    parser.add_argument('-q', '--quiet', action='store_true',
-                        help='display only passcode')
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help='display more text as output')
 
     parser.add_argument('length', type=int, nargs='?', default = LENGTH,
                         help=f'specify the number of words (DEFAULT: {LENGTH})')
@@ -63,11 +63,10 @@ def main(args):
     passcode = gen_passcode(f"{FILES_PATH}{WORDS_FILE}", args.length,
                             args.separator, args.capitalize)
     # Displays only the passcode if quiet mode is turned on
-    if args.quiet:
-        print(passcode)
-    else:
+    if args.verbose:
         print('Generated Passcode:', passcode)
-
+    else:
+        print(passcode)
 main(get_args())
 
 
