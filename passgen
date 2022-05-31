@@ -13,7 +13,9 @@ def get_args():
     parser = argparse.ArgumentParser(description='Generate a password or a passphrase')    
     subparsers = parser.add_subparsers(title='modes available', dest="mode",
                                     description='to see help for the modes try "passgen phrase -h" or "passgen key -h"')
-                 
+    
+    parser.add_argument('-o', '--output', help='Output the results into a specified file')
+         
     # Passphrase Options
     phrase = subparsers.add_parser('phrase', help='generate a passphrase', 
                                 description='Generates a random series of words separated by a character')
@@ -53,6 +55,11 @@ def get_args():
     return args
 
 
+# Save output to a file
+def file_output(out_filename, output):
+    with open(out_filename, 'w') as outfile:
+        outfile.write(output)
+
 
 def main(args):
     # Passphrase 
@@ -67,11 +74,15 @@ def main(args):
                  == args.special_chars:
             print("Error! No possible password for this configuration. All available options disabled")
             exit(1)
-
         output =  gen_password(args.length, args.no_uppercase, args.no_lowercase,
                                args.no_digits, args.special_chars)
     return output
 
-print(main(get_args()))
 
+args = get_args()
+if args.output:
+    output = main(args)
+    file_output(args.output, output)
+else:
+    print(main(args))
 
