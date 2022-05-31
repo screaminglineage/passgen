@@ -18,7 +18,7 @@ FILES_PATH = "files/"       # File Paths
 # List of Words to use
 WORDS_FILE = "words.txt"
 # Uncomment the line below to use a much larger of collection of words for passphrase generation
-# Howver Note that most of the words in this file are either uncommon or sometimes acronyms
+# However Note that most of the words in this file are either uncommon or sometimes acronyms
 #WORDS_FILE = "words_big.txt"
 
 
