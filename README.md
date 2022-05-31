@@ -53,12 +53,14 @@ Generates a random series of words separated by a character
 The `phrase` keyword needs to be used before any of the options below.
 
   - `-h`, `--help` - show a help message and exit
+  - `-l`, `--length` - set the length of each word in passphrase (if the length is set to something which is unavailable in the words file then it defaults back to a random letter length)[DEFAULT: **Random**]
   - `-w`, `--word-count` - set the number of words in passphrase [DEFAULT: **4**]
   - `-S`, `--separator` - set separator between each word of passphrase [DEFAULT: "**-**"]
   - `-c`, `--capitalize` - capitalize the first letter of each word in the passphrase
 
   
 #### Examples  
+  - `passgen phrase -l 6` - generates a random string of **4** (Default) words each of length **6** letters
   - `passgen phrase -w 3` - generates a random string of **3** words separated by a "**-**" such as `given-yard-slip`
   - `passgen phrase -w 5 -S "#"` - generates a random string of **5** words separated by a "**#**" such as `push#square#hall#satisfy#summer`
   - `passgen phrase -c -S "@"` - generates a random string of **4** (Default) words separated by an "**@**" with the first letter of each word capitalized such as `Concern@Imagine@Economic@Plane`

@@ -1,7 +1,5 @@
 Add support for short versions (Eg - "p" instead of "phrase")
 Add Menu option
-Make the length of each word configurable (for passphrase)
-Make sure a single word isnt repeated twice (for passphrase)
 Add option to output results to file
 Auto-copy to clipboard after generating output (?)
 

@@ -1,5 +1,20 @@
 import random
 
+# Gets shortest and longest word in the file to check if the 
+# option to select passphrase word length doesnt go beyond those
+def get_shortest_longest(filename):
+    longest = 0
+    shortest = 9999999
+    with open(filename, 'r') as file:
+        for line in file:
+            if len(line.strip()) > longest:
+                longest = len(line.strip())
+            elif len(line.strip()) < shortest and len(line.strip()) > 0:
+                shortest = len(line.strip())
+    return (shortest, longest)
+
+
+
 def gen_upper():
     '''Generates a Random Uppercase Letter'''
     return chr(random.randint(65, 90))
@@ -36,9 +51,9 @@ def gen_password(length, allow_upper, allow_lower, allow_digit, allow_special):
 
 
 
-def gen_passphrase(filepath, word_count, separator, is_capital):
+def gen_passphrase(filepath, word_count, separator, is_capital, word_length=None,):
     '''Generates a list of random words from a file and then performs the
-    required operations (adding capitalization and/or separator)'''
+    required operations (adding capitalization, separator, etc)'''
     
     with open(filepath, 'r') as words_file:
         words_list = words_file.readlines()
@@ -47,7 +62,19 @@ def gen_passphrase(filepath, word_count, separator, is_capital):
     passphrase_words = []
     while len(passphrase_words) < word_count:
         num = random.randint(0, (len(words_list) - 1))
-        passphrase_words.append(words_list[num].strip())
+        word = words_list[num].strip()
+
+        # Sets the length of each word but if the length
+        # is outside the range of the words in the file then
+        # just generates a random word
+        if word_length is not None:
+            length = get_shortest_longest(filepath)
+            if word_length < length[0] or word_length > length[1]:
+                passphrase_words.append(word)
+                continue
+            elif len(word) != word_length:
+                continue
+        passphrase_words.append(word)
 
     # Capitalizing first letter of each word is specified
     # Also makes all words starting with a capital letter lowercase 

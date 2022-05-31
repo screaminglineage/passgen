@@ -19,7 +19,7 @@ FILES_PATH = "files/"       # File Paths
 WORDS_FILE = "words.txt"
 # Uncomment the line below to use a much larger of collection of words for passphrase generation
 # However Note that most of the words in this file are either uncommon or sometimes acronyms
-#WORDS_FILE = "words_big.txt"
+# WORDS_FILE = "words_big.txt"
 
 
 
@@ -31,3 +31,4 @@ default_no_upper = "Off" if NO_UPPER else "On"
 default_no_lower = "Off" if NO_LOWER else "On"
 default_no_digit = "Off" if NO_DIGIT else "On"
 default_no_special = "On" if NO_SPECIAL else "Off"
+
