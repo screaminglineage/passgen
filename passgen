@@ -4,7 +4,7 @@ from core.pass_generators import *
 from core.defaults import *
 
 import argparse
-
+import pyperclip
 
 
 # Argparser get command line options
@@ -14,7 +14,9 @@ def get_args():
     subparsers = parser.add_subparsers(title='modes available', dest="mode",
                                     description='to see help for the modes try "passgen phrase -h" or "passgen key -h"')
     
-    parser.add_argument('-o', '--output', help='Output the results into a specified file')
+    parser.add_argument('-o', '--output', help='output the results into a specified file')
+    parser.add_argument('-y', '--yank', action='store_true', 
+                        help='yank (copy) the results directly into the clipboard')
          
     # Passphrase Options
     phrase = subparsers.add_parser('phrase', help='generate a passphrase', 
@@ -80,9 +82,14 @@ def main(args):
 
 
 args = get_args()
+output = main(args)
 if args.output:
-    output = main(args)
     file_output(args.output, output)
+    exit()
+elif args.yank:
+    pyperclip.copy(output)
+    print(output)
+    print("Output Copied to Clipboard!")
 else:
-    print(main(args))
+    print(output)
 
