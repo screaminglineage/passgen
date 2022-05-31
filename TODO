@@ -1,4 +1,3 @@
-Update README (replace "word" with "key")
 Add support for short versions (Eg - "p" instead of "phrase")
 Add Menu option
 Make the length of each word configurable (for passphrase)
