@@ -36,9 +36,9 @@ def gen_password(length, allow_upper, allow_lower, allow_digit, allow_special):
 
 
 
-def gen_passphrase(filepath, word_count, separator, is_capital):
+def gen_passphrase(filepath, word_count, separator, is_capital, word_length=None,):
     '''Generates a list of random words from a file and then performs the
-    required operations (adding capitalization and/or separator)'''
+    required operations (adding capitalization, separator, etc)'''
     
     with open(filepath, 'r') as words_file:
         words_list = words_file.readlines()
@@ -47,7 +47,12 @@ def gen_passphrase(filepath, word_count, separator, is_capital):
     passphrase_words = []
     while len(passphrase_words) < word_count:
         num = random.randint(0, (len(words_list) - 1))
-        passphrase_words.append(words_list[num].strip())
+        word = words_list[num].strip()
+        
+        # Checking if the word's length matches
+        if len(word) != word_length and word_length is not None:
+            continue
+        passphrase_words.append(word)
 
     # Capitalizing first letter of each word is specified
     # Also makes all words starting with a capital letter lowercase 

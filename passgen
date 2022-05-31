@@ -21,6 +21,8 @@ def get_args():
     phrase.add_argument('-w', '--word-count', type=int, default = WORD_COUNT,
                         help=f'specify the number of words [DEFAULT: {WORD_COUNT}]')
 
+    phrase.add_argument('-l', '--length', type=int, help=f'specify the number of letters in each word [DEFAULT: Random]')
+
     phrase.add_argument('-S', '--separator', type=str, default = SEPARATOR,
                         help=f'character to separate each word [DEFAULT: "{SEPARATOR}"]')
 
@@ -55,8 +57,12 @@ def get_args():
 def main(args):
     # Passphrase 
     if args.mode == "phrase":
+        if args.word_count > 14 or args.word_count < 1:
+            print("Error! No available words for the specified length")
+            return 1
         output = gen_passphrase(f"{FILES_PATH}{WORDS_FILE}", args.word_count,
-                                args.separator, args.capitalize)
+                                args.separator, args.capitalize,  args.length)
+
     # Password
     elif args.mode == "key":
         # Checks if all have been set to False
