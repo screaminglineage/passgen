@@ -1,10 +1,9 @@
 #!/usr/bin/env python
+import argparse
+import pyperclip
 
 from core.pass_generators import *
 from core.defaults import *
-
-import argparse
-import pyperclip
 
 
 # Argparser get command line options
@@ -58,9 +57,9 @@ def get_args():
 
 
 # Save output to a file
-def file_output(out_filename, output):
-    with open(out_filename, 'w') as outfile:
-        outfile.write(output)
+def file_save(out_filename, output):
+    with open(out_filename, 'a') as outfile:
+        outfile.write(output + '\n')
 
 
 def main(args):
@@ -74,7 +73,7 @@ def main(args):
         # Checks if all have been set to False
         if False == args.no_uppercase == args.no_lowercase == args.no_digits \
                  == args.special_chars:
-            print("Error! No possible password for this configuration. All available options disabled")
+            print("Error! No possible password for this configuration. No option turned on!")
             exit(1)
         output =  gen_password(args.length, args.no_uppercase, args.no_lowercase,
                                args.no_digits, args.special_chars)
@@ -84,15 +83,22 @@ def main(args):
     return output
 
 
+# Handles the final generated output 
+def handle_output(args, final_output):
+    if args.output:
+        file_save(args.output, final_output)
+        print(f"Output Saved in File: {args.output}")
+
+    elif args.yank:
+        pyperclip.copy(final_output)
+        print(final_output)
+        print("Output Copied to Clipboard!")
+    else:
+        print(final_output)
+
+
+
 args = get_args()
 final_out = main(args)
-if args.output:
-    file_output(args.output, final_out)
-    exit()
-elif args.yank:
-    pyperclip.copy(final_out)
-    print(final_out)
-    print("Output Copied to Clipboard!")
-else:
-    print(final_out)
+handle_output(args, final_out)
 
