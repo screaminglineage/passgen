@@ -53,7 +53,7 @@ Generates a random series of words separated by a character
 The `phrase` keyword needs to be used before any of the options below.
 
   - `-h`, `--help` - show a help message and exit
-  - `-l`, `--length` - set the length of each word in passphrase [DEFAULT: **Random**]
+  - `-l`, `--length` - set the length of each word in passphrase (if the length is set to something which is unavailable in the words file then it defaults back to a random letter length)[DEFAULT: **Random**]
   - `-w`, `--word-count` - set the number of words in passphrase [DEFAULT: **4**]
   - `-S`, `--separator` - set separator between each word of passphrase [DEFAULT: "**-**"]
   - `-c`, `--capitalize` - capitalize the first letter of each word in the passphrase

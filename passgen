@@ -57,9 +57,6 @@ def get_args():
 def main(args):
     # Passphrase 
     if args.mode == "phrase":
-        if args.word_count > 14 or args.word_count < 1:
-            print("Error! No available words for the specified length")
-            return 1
         output = gen_passphrase(f"{FILES_PATH}{WORDS_FILE}", args.word_count,
                                 args.separator, args.capitalize,  args.length)
 
