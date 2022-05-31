@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import argparse
 import pyperclip
+import sys
 
 from core.pass_generators import *
 from core.defaults import *
@@ -74,12 +75,12 @@ def main(args):
         if False == args.no_uppercase == args.no_lowercase == args.no_digits \
                  == args.special_chars:
             print("Error! No possible password for this configuration. No option turned on!")
-            exit(1)
+            sys.exit(1)
         output =  gen_password(args.length, args.no_uppercase, args.no_lowercase,
                                args.no_digits, args.special_chars)
     else:
         print('No arguments given. See "passgen -h" or "passgen --help"')
-        exit(0)
+        sys.exit(0)
     return output
 
 
