@@ -78,18 +78,21 @@ def main(args):
             exit(1)
         output =  gen_password(args.length, args.no_uppercase, args.no_lowercase,
                                args.no_digits, args.special_chars)
+    else:
+        print('No arguments given. See "passgen -h" or "passgen --help"')
+        exit(0)
     return output
 
 
 args = get_args()
-output = main(args)
+final_out = main(args)
 if args.output:
-    file_output(args.output, output)
+    file_output(args.output, final_out)
     exit()
 elif args.yank:
-    pyperclip.copy(output)
-    print(output)
+    pyperclip.copy(final_out)
+    print(final_out)
     print("Output Copied to Clipboard!")
 else:
-    print(output)
+    print(final_out)
 
