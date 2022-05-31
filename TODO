@@ -1,6 +1,3 @@
-Add support for short versions (Eg - "p" instead of "phrase")
+Decide where the actions for outputing and copying to clipboard will go (before the keyword or after it)
+Add support for short versions (Eg - "p" instead of "phrase") (?)
 Add Menu option
-Add option to output results to file
-Auto-copy to clipboard after generating output (?)
-
-
