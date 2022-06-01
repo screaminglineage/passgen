@@ -14,10 +14,7 @@ def get_args():
     subparsers = parser.add_subparsers(title='modes available', dest="mode",
                                     description='to see help for the modes try "passgen phrase -h" or "passgen key -h"')
     
-    parser.add_argument('-o', '--output', help='output the results into a specified file')
-    parser.add_argument('-y', '--yank', action='store_true', 
-                        help='yank (copy) the results directly into the clipboard')
-         
+    
     # Passphrase Options
     phrase = subparsers.add_parser('phrase', help='generate a passphrase', 
                                 description='Generates a random series of words separated by a character')
@@ -32,6 +29,11 @@ def get_args():
 
     phrase.add_argument('-c', '--capitalize', action='store_true', default = IS_CAPITAL,
                         help=f'capitalize the first character of each word [DEFAULT: {default_is_capital}]')
+        
+    phrase.add_argument('-o', '--output', help='output the results into a specified file')
+
+    phrase.add_argument('-y', '--yank', action='store_true', 
+                        help='yank (copy) the results directly into the clipboard')
 
     
     # Password Options 
@@ -52,6 +54,11 @@ def get_args():
 
     key.add_argument('-s', '--special-chars', action='store_true', default = NO_SPECIAL,
                         help=f'allow special characters in the password [DEFAULT: {default_no_special}]')
+    
+    key.add_argument('-o', '--output', help='output the results into a specified file')
+    
+    key.add_argument('-y', '--yank', action='store_true', 
+                        help='yank (copy) the results directly into the clipboard')
 
     args = parser.parse_args()
     return args
