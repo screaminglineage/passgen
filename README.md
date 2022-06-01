@@ -45,7 +45,7 @@ modes available:
   
 ### Generate Passphrase
 ```
-usage: passgen phrase [-h] [-w WORD_COUNT] [-S SEPARATOR] [-c]
+usage: passgen phrase [-h] [-w WORD_COUNT] [-S SEPARATOR] [-c] [-o OUTPUT] [-y]
 
 Generates a random series of words separated by a character
 ```
@@ -57,6 +57,8 @@ The `phrase` keyword needs to be used before any of the options below.
   - `-w`, `--word-count` - set the number of words in passphrase [DEFAULT: **4**]
   - `-S`, `--separator` - set separator between each word of passphrase [DEFAULT: "**-**"]
   - `-c`, `--capitalize` - capitalize the first letter of each word in the passphrase
+  - `-o`, `--output` - set a file to output the results to
+  - `-y`, `--yank` - yank (copy) the results to the system clipboard
 
   
 #### Examples  
@@ -68,7 +70,7 @@ The `phrase` keyword needs to be used before any of the options below.
  
 ### Generate Password
 ```
-usage: passgen word [-h] [-l LENGTH] [-nu] [-nl] [-nd] [-s]
+usage: passgen word [-h] [-l LENGTH] [-nu] [-nl] [-nd] [-s] [-o OUTPUT] [-y]
 
 Generates a random series of words separated by a character
 ```
@@ -81,6 +83,8 @@ The `word` keyword needs to be used before any of the options below.
   - `-nl`, `--no-lowercase` - dont allow lowercase characters in the password 
   - `-nd`, `--no-digits` - dont allow digits in the password 
   - `-s`, `--special-chars` - allow special characters in the password 
+  - `-o`, `--output` - set a file to output the results to
+  - `-y`, `--yank` - yank (copy) the results to the system clipboard
 
 #### Examples
 
