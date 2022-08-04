@@ -1,4 +1,4 @@
-# passgen
+# Passgen
 Command line password and passphrase generator 
 
 ## Contents
@@ -15,7 +15,7 @@ Command line password and passphrase generator
 
 ## Introduction
 
-passgen can be used to generate a passphrase or a password in the command line.
+Passgen can be used to generate a passphrase or a password in the command line.
 
 A **passphrase** is a string of randomly generated words separated by any symbol. The separator can be anything, including a blank (no separator) or even multiple words with a space between them (The Sky's the Limit!) (or atleast as long as you enclose it within quotes). 
 
